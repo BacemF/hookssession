@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import MovieList from "./Components/MovieList";
+
+import AddMovie from "./Components/AddMovie";
+
+import { movieData } from "./data";
 
 function App() {
+  const [data, setData] = useState(movieData);
+  const handleDelete = (id) => setData(data.filter((el) => el.id !== id));
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AddMovie />
+      <MovieList list={data} handleDelete={handleDelete} />
     </div>
   );
 }
-
 export default App;
